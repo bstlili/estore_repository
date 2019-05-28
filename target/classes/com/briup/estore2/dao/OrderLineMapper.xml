@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.estore2.dao.OrderLineDao">
+	<!-- public void saveLine(OrderLine line); -->
+	<insert id="saveLine" parameterType="OrderLine">
+		<selectKey keyProperty="id" resultType="Long" order="BEFORE">
+			select orderline_seq.nextval from dual
+		</selectKey>
+		insert into orderline(id,num,orderid,bookid)
+		values(#{id},#{num},#{oderform.id},#{book.id})
+	</insert>
+	
+	
+	<!-- public void delLineByOrderId(Long id); -->
+	<delete id="delLineByOrderId" parameterType="Long">
+		delete from orderline
+		where orderid=#{id}
+	</delete>
+</mapper>

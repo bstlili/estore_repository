@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.estore2.dao.BookDao">
+    <select id="selectAllBooks" resultType="Book">
+		select * from book
+    </select>
+	
+	<!-- public Book findBookById(Long id); -->
+	<select id="findBookById" parameterType="Long" resultType="Book">
+		select * from book
+		where id=#{id}
+	</select>
+	
+	<!-- 	public Book findBookByName(String name); -->
+	<select id="findBookByName" parameterType="String" resultType="Book">
+		select * from book
+		where name=#{name}
+	</select>
+	
+	<!-- public List<Book> findBookByKeyWord(String keyword); -->
+	<select id="findBookByKeyWord" parameterType="String" resultType="Book">
+		select * from book
+		where name like upper(#{keyword})
+			  or
+			  name like lower(#{keyword})
+			  or
+			  name like initcap(#{keyword})
+			  or  
+			  type like #{keyword}
+	</select>
+</mapper>

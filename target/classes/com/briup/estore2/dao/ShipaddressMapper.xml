@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.estore2.dao.ShipaddressDao">
+	<!-- public void addShipaddress(Shipaddress shipaddress); -->
+	<insert id="addShipaddress" parameterType="Shipaddress">
+		<selectKey keyProperty="id" resultType="Long" order="BEFORE">
+			select ship_id_seq.nextval from dual
+		</selectKey>
+		insert into shipaddres(id,shipuname,adres,phone,cus_id)
+		values(#{id},#{shipuname},#{adres},#{phone},#{customer.id})
+	</insert>
+	
+	<!-- public List<Shipaddress> findShipaddressByCustomerId(Long id) -->
+	<select id="findShipaddressByCustomerId" parameterType="Long" resultType="Shipaddress">
+		select * from shipaddres
+		where cus_id=#{id}
+	</select>
+
+	<!-- public Shipaddress findShipaddressById(Long id); -->
+	<select id="findShipaddressById" parameterType="Long" resultType="Shipaddress">
+		select * from shipaddres
+		where id=#{id}
+	</select>
+
+</mapper>
